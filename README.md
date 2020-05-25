@@ -4,6 +4,15 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get access to
 Azure Devops Server
 
 
+## ToDo
+
+* [ ] save invitations between sessions
+* [ ] configure just in time status report templates.
+   ~~~text
+   #17.full #18.short
+   ~~~
+
+
 ## Requirements
 
 None.
