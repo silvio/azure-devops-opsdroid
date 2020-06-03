@@ -5,10 +5,14 @@ from azure.devops.exceptions import \
 from msrest.authentication import \
         BasicTokenAuthentication, \
         BasicAuthentication
+from opsdroid.events import \
+        UserInvite, \
+        JoinRoom
 from opsdroid.logging import \
         logging
 from opsdroid.matchers import \
         match_regex, \
+        match_event, \
         match_parse
 from opsdroid.skill import \
         Skill
@@ -26,6 +30,7 @@ CONFIG_SCHEMA = {
     Required("pat"): str,
     Required("url"): str,
     Required('projectname'): str,
+    'join_when_invited': bool,
 }
 
 
@@ -68,6 +73,9 @@ class MSDevelop(Skill):
         # get WIT client
         self.wit = self.connection.clients.get_work_item_tracking_client()
 
+        self.join_when_invited = config.get("join_when_invited", False)
+        self.ase(f"The bot can join: {self.join_when_invited}")
+
 
     # Add status entry
     def ase(self, text, failure=0):
@@ -76,12 +84,19 @@ class MSDevelop(Skill):
         return
 
 
+    @match_event(UserInvite)
+    async def on_invite_to_room(self, invite):
+        pprint(f"{invite}")
+        if self.join_when_invited:
+            await invite.respond(JoinRoom())
+
     @match_parse(r'bot, status please')
     async def bot_status(self, opsdroid, config, message):
         text = ""
 
         text += f"@{message.user}: Statusreport\n\n"
         text += f"**Healthstate**: {'OK' if self.status_something_wrong else 'Sick'}\n\n"
+        text += f"**Joinable**: {self.join_when_invited}\n\n"
         text += f"~~~\n"
 
         for entry in self.statuslog:

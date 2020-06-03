@@ -7,6 +7,8 @@ Azure Devops Server
 ## ToDo
 
 * [x] **0.1.0**: Return link list of WITs if a number starts with `#`
+* [x] **0.1.0**: Bot should be able to accept invitations
+  * [ ] Only accept invitations from a configurable list of domains
 * [ ] configure just in time status report templates.
    ~~~text
    #17.full #18.short
@@ -24,6 +26,7 @@ None.
 * `pat`: (mandatory) And its public access token
 * `url`: (mandatory) URL to the collection
 * `projectname`: (mandatory) name of project
+* `join_on_invite`: (optional) Invitations followed
 
 
 ### Example
