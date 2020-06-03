@@ -25,6 +25,8 @@ import regex
 import commonmark
 import datetime
 
+logger = logging.getLogger(__name__)
+
 CONFIG_SCHEMA = {
     Required("username"): str,
     Required("pat"): str,
@@ -38,12 +40,11 @@ class MSDevelop(Skill):
     def __init__(self, opsdroid, config):
         super(MSDevelop, self).__init__(opsdroid, config)
 
-        # configure logging
-        logging.getLogger("azure").setLevel(logging.DEBUG)
-        logging.info("ms-develop started ...")
-
         self.statuslog = []
         self.status_something_wrong = 1
+
+        # configure logging
+        self.ase("ms-develop started ...")
 
         # configure connection to devops server
         self.credential = BasicAuthentication(config.get('username'), config.get('pat'))
@@ -79,6 +80,7 @@ class MSDevelop(Skill):
 
     # Add status entry
     def ase(self, text, failure=0):
+        logger.debug(f"statuslog: {text}")
         self.statuslog += [f"{datetime.datetime.now()}: {text}"]
         self.status_something_wrong |= failure
         return
