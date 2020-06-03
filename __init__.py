@@ -96,14 +96,14 @@ class MSDevelop(Skill):
 
     # We are serach only for one occurent and analyse in this task if it
     # occures more than one time
-    @match_regex(r'#(?P<wit>\d+)', matching_condition="match")
+    @match_regex(r'(?s).*#(\d+).*', matching_condition="match")
     async def wit_parser_function(self, apsdroid, config, message):
         c = message.connector
         text = f"@{message.user}: I have found follwing WITs:\n"
 
         notfound = ""
 
-        for i in regex.finditer(r'#(?P<wit>\d+)', message.text):
+        for i in regex.finditer(r'#(?P<wit>\d+)', message.text, regex.MULTILINE):
             ids = i.group(0)[1:]
             try:
                 value = self.wit.get_work_item(id=ids, project=self.projectid)
