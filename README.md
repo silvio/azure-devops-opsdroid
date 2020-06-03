@@ -6,6 +6,7 @@ Azure Devops Server
 
 ## ToDo
 
+* [x] **0.1.0**: Return link list of WITs if a number starts with `#`
 * [ ] configure just in time status report templates.
    ~~~text
    #17.full #18.short
