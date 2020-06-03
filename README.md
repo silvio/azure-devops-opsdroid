@@ -19,10 +19,10 @@ None.
 
 ## Configuration
 
-* `username`: Name of the user accessing the Azure DevOps server.
-* `pat`: And its public access token
-* `url`: URL to the collection
-* `projectname`: name of project
+* `username`: (mandatory) Name of the user accessing the Azure DevOps server.
+* `pat`: (mandatory) And its public access token
+* `url`: (mandatory) URL to the collection
+* `projectname`: (mandatory) name of project
 
 
 ### Example
