@@ -10,7 +10,7 @@ Azure Devops Server
 * [x] **0.1.0**: Bot should be able to accept invitations
   * [ ] Only accept invitations from a configurable list of domains
 * [ ] return help text, when command is `bot` or `bot, help please`
-* [ ] return version number or/and git commit id with `bot` or `bot, version please`
+* [x] **0.1.0**: return version number or/and git commit id with `bot, status please`
   command.
 * [ ] configure just in time status report templates.
    ~~~text

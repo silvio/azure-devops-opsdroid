@@ -24,6 +24,7 @@ from voluptuous import\
 import regex
 import commonmark
 import datetime
+import git
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +46,14 @@ class MSDevelop(Skill):
 
         # configure logging
         self.ase("ms-develop started ...")
+
+        self.version = None
+        try:
+            self.version = git.Repo(path=__path__[0], search_parent_directories=True).git.describe('--always', '--tags')
+        except:
+            self.version = "unknown"
+        self.ase(f"Version: {self.version}")
+
 
         # configure connection to devops server
         self.credential = BasicAuthentication(config.get('username'), config.get('pat'))
@@ -94,6 +103,9 @@ class MSDevelop(Skill):
     @match_parse(r'bot, status please')
     async def bot_status(self, opsdroid, config, message):
         text = ""
+
+        text += f"**opsdroid** bot for azure-devops server\n\n"
+        text += f"**Sources**: `https://github.com/silvio/azure-devops-opsdroid.git` (**Version**: {self.version})\n\n"
 
         text += f"@{message.user}: Statusreport\n\n"
         text += f"**Healthstate**: {'OK' if self.status_something_wrong else 'Sick'}\n\n"
