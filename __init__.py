@@ -25,6 +25,7 @@ CONFIG_SCHEMA = {
     Required("username"): str,
     Required("pat"): str,
     Required("url"): str,
+    Required('projectname'): str,
 }
 
 
