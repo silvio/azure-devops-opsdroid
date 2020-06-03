@@ -1,18 +1,25 @@
-from opsdroid.matchers import match_regex, \
-        match_parse
-from opsdroid.skill import Skill
-from opsdroid.logging import logging
-from azure.devops.connection import Connection
-from azure.devops.exceptions import AzureDevOpsServiceError
+from azure.devops.connection import \
+        Connection
+from azure.devops.exceptions import \
+        AzureDevOpsServiceError
 from msrest.authentication import \
         BasicTokenAuthentication, \
         BasicAuthentication
-from pprint import pprint
+from opsdroid.logging import \
+        logging
+from opsdroid.matchers import \
+        match_regex, \
+        match_parse
+from opsdroid.skill import \
+        Skill
+from pprint import \
+        pprint
+from voluptuous import\
+        Required
+
 import regex
 import commonmark
 import datetime
-
-from voluptuous import Required
 
 CONFIG_SCHEMA = {
     Required("username"): str,
