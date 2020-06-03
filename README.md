@@ -6,7 +6,6 @@ Azure Devops Server
 
 ## ToDo
 
-* [ ] save invitations between sessions
 * [ ] configure just in time status report templates.
    ~~~text
    #17.full #18.short
