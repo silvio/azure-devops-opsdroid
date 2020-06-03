@@ -41,14 +41,14 @@ class MSDevelop(Skill):
         self.status_something_wrong = 1
 
         # configure connection to devops server
-        self.credential = BasicAuthentication(self.config['username'], self.config['pat'])
-        self.connection = Connection(base_url=self.config['url'], creds=self.credential)
+        self.credential = BasicAuthentication(config.get('username'), config.get('pat'))
+        self.connection = Connection(base_url=config.get('url'), creds=self.credential)
         self.core = self.connection.clients.get_core_client();
 
         if self.core:
-            self.ase(f"connection established to {self.config['url']}")
+            self.ase(f"connection established to {config.get('url')}")
         else:
-            self.ase(f"no connection to {self.config['url']} ... No communication to devops possible.")
+            self.ase(f"no connection to {config.get('url')} ... No communication to devops possible.")
             return
 
         # get project id
@@ -56,13 +56,13 @@ class MSDevelop(Skill):
         projectlist = self.core.get_projects()
         if len(projectlist.value) > 0:
             for project in projectlist.value:
-                if project.name == self.config['projectname']:
+                if project.name == config.get('projectname'):
                     found = True
                     self.projectid = project.id
                     self.ase(f"Project found (id: {self.projectid})")
 
         if not found:
-            self.ase(f"Project '{self.config['projectname']}' not found")
+            self.ase(f"Project '{config.get('projectname')}' not found")
             return
 
         # get WIT client
