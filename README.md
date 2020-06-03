@@ -9,6 +9,9 @@ Azure Devops Server
 * [x] **0.1.0**: Return link list of WITs if a number starts with `#`
 * [x] **0.1.0**: Bot should be able to accept invitations
   * [ ] Only accept invitations from a configurable list of domains
+* [ ] return help text, when command is `bot` or `bot, help please`
+* [ ] return version number or/and git commit id with `bot` or `bot, version please`
+  command.
 * [ ] configure just in time status report templates.
    ~~~text
    #17.full #18.short

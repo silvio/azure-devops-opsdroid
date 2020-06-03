@@ -86,7 +86,6 @@ class MSDevelop(Skill):
 
     @match_event(UserInvite)
     async def on_invite_to_room(self, invite):
-        pprint(f"{invite}")
         if self.join_when_invited:
             await invite.respond(JoinRoom())
 
