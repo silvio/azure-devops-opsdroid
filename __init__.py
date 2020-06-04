@@ -135,8 +135,8 @@ class MSDevelop(Skill):
             ids = i.group(0)[1:]
             try:
                 value = self.wit.get_work_item(id=ids, project=self.projectid)
-            except AzureDevOpsServiceError:
-                notfound += f"{ids}, "
+            except Exception as e:
+                notfound += f"[{ids}](http:// '{e}'), "
                 continue
 
             text += f"* [link]({value._links.additional_properties['html']['href']}) - {ids} - {value.fields['System.Title']}\n"
