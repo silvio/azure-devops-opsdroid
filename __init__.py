@@ -127,7 +127,7 @@ class MSDevelop(Skill):
     @match_regex(r'(?s).*#(\d+).*', matching_condition="match")
     async def wit_parser_function(self, apsdroid, config, message):
         c = message.connector
-        text = f"@{message.user}: I have found follwing WITs:\n"
+        text = ""
 
         notfound = ""
 
@@ -141,6 +141,8 @@ class MSDevelop(Skill):
 
             text += f"* [link]({value._links.additional_properties['html']['href']}) - {ids} - {value.fields['System.Title']}\n"
 
+        if len(text) > 0:
+            text = f"@{message.user}: I have found follwing WITs:\n{text}"
 
         notfound = notfound[:-2]
 
