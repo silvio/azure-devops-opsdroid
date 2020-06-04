@@ -139,7 +139,7 @@ class MSDevelop(Skill):
                 notfound += f"{ids}, "
                 continue
 
-            text += f"* [link]({value.url}) - {ids} - {value.fields['System.Title']}\n"
+            text += f"* [link]({value._links.additional_properties['html']['href']}) - {ids} - {value.fields['System.Title']}\n"
 
 
         notfound = notfound[:-2]
